@@ -1,0 +1,282 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+:root {
+	--ff-heading: "Staatliches", cursive;
+	--ff-texting: "Palanquin", sans-serif;
+
+	--bg-primary: hsla(233, 100%, 97%, 1);
+	--bg-secondary: hsla(218, 17%, 62%, 1);
+	--bg-secondary-light: hsla(275, 18%, 79%, 1);
+	--bg-secondary-light2: hsla(312, 91%, 96%, 1);
+
+	--fc-primary: hsla(0, 0%, 100%, 1);
+	--fc-secondary: hsla(274, 84%, 12%, 1);
+	--fc-secondary-light: hsla(232, 17%, 35%, 1);
+
+	--font-size: 62.5%;
+	--fs-body: 1.6rem;
+	--fs-heading: clamp(4rem, 1rem + 5vw, 5.6rem);
+	--fs-heading-sm: clamp(3rem, 0.5rem + 3vw, 4rem);
+}
+
+body {
+	background: #e5e5e5;
+}
+
+.page {
+	max-width: 38.4rem;
+
+	margin: 0 auto;
+}
+
+.card img {
+	/*colocando a imagem para respeitar a largura que definimos na div page*/
+	width: 100%; /*sem isso a imagem transborda pra fora da caixa: seria um overflow*/
+	height: auto; /*altura automática pela sua proporção de largura, cada imagem tem seu tamaho, fica proporcional*/
+}
+
+header {
+	font-family: var(--ff-heading);
+  color: var(--fc-primary);
+  text-align: center;
+
+	padding-top: 3.2rem;
+	padding-bottom: 1rem;
+
+	background: var(--bg-secondary);
+
+	width: 100%;
+}
+
+header img {
+	margin-bottom: 4rem;
+	filter: drop-shadow(0px 6px 6px rgba(0, 0, 0, 0.25));
+
+  animation: topdown 1s; /*modo short-hand*/;
+}
+
+header h1 {
+	background: var(--bg-secondary-light);
+	padding-top: 8px;
+	padding-bottom: 8px;
+	font-size: var(--fs-heading);
+
+	line-height: 3.4rem;
+
+	letter-spacing: 0.05em;
+
+	text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+
+  animation: downtop 1s;
+}
+
+header p {
+	font-family: var(--ff-texting);
+	font-style: normal;
+	font-weight: 400;
+	font-size: var(--fs-body);
+
+	line-height: 2rem;
+
+	text-align: center;
+
+	padding-top: 1.4rem;
+  padding-right: 2rem;
+  padding-left: 2rem;
+}
+
+
+main {
+  display: grid;
+  gap: 3.2rem;
+
+	align-items: center;
+
+	background: var(--bg-primary);
+
+	padding-left: 3.2rem;
+	padding-right: 3.2rem;
+	padding-bottom: 2rem;
+
+  padding-top: 2rem;
+}
+
+.card {
+	position: relative;
+
+	font-family: var(--ff-heading);
+}
+
+.card img { /*fazendo com que a imagem fique corresponente ao tamanho do cartão do layout*/
+  height: 41.6rem;
+  object-fit: cover;/*ideia de pegar o objeto imagem em si, vai considerar
+  a tag img como uma caixa e o source como o objeto*/
+ 
+  border-radius: 6px; /*deixamos em px mesmo, não causará grande diferemça, são 6px, mas são em um borda radio.*/
+  
+  transition: all 200ms; /*ajustuando o transform e o opacity para não serem repentinos*/
+}
+
+.card img:hover {
+  transform:scale(1.1); /*mouse em cima escala aumenta*/
+  opacity: 0.4; /*mouse em cima opacidade é acionada escondendo um pouco a imagem dando ênfase ao texto*/
+}
+
+.card h2 {
+
+  position: absolute;
+  top: 1.6rem;
+	right: 1.6rem;
+
+  border-radius: 2rem;
+  background: var(--bg-secondary-light2);
+  font-size: var(--fs-body);
+  font-weight: 400;
+  color: var(--fc-secondary-light);
+
+  
+  padding: 0 1.6rem;
+  width: fit-content;/*fit=encaixar. Encaixar no conteúdo(vai acompanhar o conteúdo dele). Pois ele estava se alargando quando aumentamos a letra do h2*/
+  height: 3.8rem; /*não adianta pôr altura em spna, ele não recebe algumas
+  propriedades block. Então mudaremos para display inline-flex para receber a altura e ainda mexer no align:center.*/
+  
+  display: inline-flex;
+  align-items: center;
+}
+
+footer {
+  font-size: 1.4rem;
+  color:var(--fc-secondary-light);
+  text-align: center;
+  padding: 2rem;
+  background: var(--bg-primary);
+}
+
+footer a {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+@keyframes topdown {
+  0% {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes downtop {
+  0% {
+    opacity: 0;
+    transform: translateY(15);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+/*Adaptando para telas maiores - Responsividade*/
+@media (min-width: 700px){
+  .page {
+    max-width: 128rem;
+    
+	  margin: 0 auto; 
+  }
+
+  .container {
+    display: grid; 
+    grid-template-columns: 0.7fr 1.3fr;
+    grid-template-rows: 90vh 10vh;
+  }
+
+  header {
+    /*width: 37rem;*/
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 4;
+  }
+
+  main {
+    overflow:auto;
+
+    background: var(--bg-primary);
+
+    padding-bottom: 8rem;
+
+    /*width: 90rem;*/
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 3;
+  }
+
+  .card {
+    position:static;
+  }
+
+  .card img { 
+    height: auto;
+    object-fit: cover;
+  }
+
+  section {
+    display: grid;
+    gap: 4rem;
+    
+    grid-template-columns: 1fr 1fr 1fr;
+    
+    grid-template-areas:
+    "A B C"
+    "D B F"
+    "D E F";
+  }
+
+  section div:nth-child(1) {
+    grid-area: A;
+  }
+
+  section div:nth-child(2) {
+  
+    grid-area: B;
+  }
+  
+  section div:nth-child(3) {
+    grid-area: C;
+  }
+
+  section div:nth-child(4) {
+    grid-area: D;
+  }
+
+  section div:nth-child(5) {
+    grid-area: E;
+  }
+
+  section div:nth-child(6) {
+    grid-area: F;
+  }
+
+  footer {
+
+    background: var(--bg-primary);
+
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 3;
+    grid-row-end: 4;
+  }
+
+}
